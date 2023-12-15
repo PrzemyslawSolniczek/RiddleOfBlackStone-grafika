@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("pictures/tlo.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("sound/welcomescreen.wav")]
 
 

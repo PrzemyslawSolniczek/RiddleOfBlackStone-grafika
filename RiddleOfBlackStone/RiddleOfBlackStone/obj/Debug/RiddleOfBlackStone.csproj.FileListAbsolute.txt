@@ -12,3 +12,21 @@ D:\Studia\Semestr V\KCK\Tryb graficzny\RiddleOfBlackStone\RiddleOfBlackStone\obj
 D:\Studia\Semestr V\KCK\Tryb graficzny\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\RiddleOfBlackStone.csproj.CoreCompileInputs.cache
 D:\Studia\Semestr V\KCK\Tryb graficzny\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\RiddleOfBlackStone.exe
 D:\Studia\Semestr V\KCK\Tryb graficzny\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\RiddleOfBlackStone.pdb
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\RiddleOfBlackStone.csproj.AssemblyReference.cache
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\MainWindow.baml
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\MainWindow.g.cs
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\App.g.cs
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\RiddleOfBlackStone_MarkupCompile.cache
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\RiddleOfBlackStone.g.resources
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\RiddleOfBlackStone.Properties.Resources.resources
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\RiddleOfBlackStone.csproj.GenerateResource.cache
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\RiddleOfBlackStone.csproj.CoreCompileInputs.cache
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\RiddleOfBlackStone.exe
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\RiddleOfBlackStone.pdb
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\bin\Debug\RiddleOfBlackStone.exe.config
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\bin\Debug\RiddleOfBlackStone.exe
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\bin\Debug\RiddleOfBlackStone.pdb
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\RiddleOfBlackStone_Content.g.cs
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\OptionsPanel.g.cs
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\RiddleOfBlackStone_MarkupCompile.lref
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\OptionsPanel.baml

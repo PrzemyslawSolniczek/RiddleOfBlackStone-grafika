@@ -12,6 +12,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <MediaElement Source="{Binding Path}" />
+        
         <!-- Menu Header -->
         <TextBlock Text="Riddle of Black Stone" FontFamily="Comic Sans MS" Foreground="#d2691e" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,65,0,434" Grid.Row="1" Width="280"/>
 
