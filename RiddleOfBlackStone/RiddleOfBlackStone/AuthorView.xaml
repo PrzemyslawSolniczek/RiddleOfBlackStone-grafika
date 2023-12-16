@@ -7,7 +7,10 @@
         mc:Ignorable="d"
         Title="AuthorView" Height="450" Width="800">
     <Grid>
-            <TextBox Text="Przemysław Solniczek" />
-            <TextBox Text="Albert Stefanowski" />
+        <StackPanel>
+            <TextBlock Text="Authors"/>
+            <TextBlock Text="Albert Stefanowski"/>
+            <TextBlock Text="Przemysław Solniczek"/>
+        </StackPanel>
     </Grid>
 </Window>
