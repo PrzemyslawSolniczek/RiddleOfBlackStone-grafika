@@ -55,9 +55,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AuthorView.xaml.cs">
+      <DependentUpon>AuthorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="GameView.xaml.cs">
+      <DependentUpon>GameView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Answer.cs" />
     <Compile Include="Model\Enemies.cs" />
+    <Compile Include="Model\GameModel.cs" />
     <Compile Include="Model\MenuModel.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Question.cs" />
@@ -70,6 +77,15 @@
     <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="ViewModel\OptionsPanelViewModel.cs" />
     <Compile Include="ViewModel\PlayerViewModel.cs" />
+    <Compile Include="ViewModel\ScenesViewModel.cs" />
+    <Page Include="AuthorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GameView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -122,6 +138,16 @@
     <Resource Include="pictures\tlo.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="pictures\tajemniczaPostac.png" />
+    <Resource Include="pictures\smok7.png" />
+    <Resource Include="pictures\archeolog2.png" />
+    <Resource Include="pictures\czarnyKamien.png" />
+    <Resource Include="pictures\jaskinia.png" />
+    <Resource Include="pictures\laboratorium3.png" />
+    <Resource Include="pictures\ladowanie ekranu.png" />
+    <Resource Include="pictures\pochodnia.png" />
+    <Resource Include="pictures\pustynia.png" />
+    <Resource Include="pictures\roslina2.png" />
     <Content Include="Sound\WelcomeScreen.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

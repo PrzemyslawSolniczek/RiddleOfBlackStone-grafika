@@ -11,22 +11,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Xml;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace RiddleOfBlackStone.ViewModel
 {
     internal class MenuViewModel : INotifyPropertyChanged
     {
         private readonly IMenuModel _menuModel;
-        public ICommand UpArrow { get; }
-        public ICommand DownArrow { get; }
-        public ICommand Enter { get; }
+        private readonly IGameModel _gameModel;
+        private GameViewModel gameViewModel;
 
-        public MenuViewModel(IMenuModel menuModel)
+
+        public MenuViewModel(IMenuModel menuModel, IGameModel gameModel)
         {
+            gameViewModel = new GameViewModel(new GameModel());
             _menuModel = menuModel;
-            UpArrow = new RelayCommand(p => HandleUpArrow());
-            DownArrow = new RelayCommand(p => HandleDownArrow());
-            Enter = new RelayCommand(p => HandleEnter());
+            _gameModel = gameModel;
+           // Enter = new RelayCommand(p => HandleEnter());
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -123,7 +124,6 @@ namespace RiddleOfBlackStone.ViewModel
                 }
             }
         }
-
         public AppState AppState
         {
             get { return _menuModel.AppState; }
@@ -136,7 +136,6 @@ namespace RiddleOfBlackStone.ViewModel
                 }
             }
         }
-
         public bool EndOfGame
         {
             get { return _menuModel.EndOfGame; }
@@ -172,10 +171,9 @@ namespace RiddleOfBlackStone.ViewModel
             }
         }
 
-        private void StartGame()
+        public void StartGame()
         {
-
-            //throw new NotImplementedException();
+            gameViewModel.CurrentScene = ScenesViewModel.InitializeStory();
         }
 
         private void StopGame()
@@ -184,12 +182,26 @@ namespace RiddleOfBlackStone.ViewModel
         }
         private void AboutAuthors()
         {
+
             //throw new NotImplementedException();
         }
-        private void CloseGame() { }
+        private void CloseGame() 
+        { 
+
+        }
         private void Options() 
         {
-            
+            switch (selectedOption)
+            {
+                case 0:
+                    break;
+                    case 1:
+                        DisplayTextLetterByLetter = !DisplayTextLetterByLetter;
+                        break;
+                    case 2:
+                        SaveOptionsToFile("options.xml");
+                        return;
+            }
         }
 
         private void HandleUpArrow()
@@ -202,21 +214,6 @@ namespace RiddleOfBlackStone.ViewModel
             selectedOption = Math.Min(3, selectedOption + 1); //DO SPRAWDZENIA
         }
 
-        private void HandleEnter()
-        {
-            switch (selectedOption)
-            {
-                case 0:
-                    Music = !Music;
-                    break;
-                case 1:
-                    DisplayTextLetterByLetter = !DisplayTextLetterByLetter;
-                    break;
-                case 2:
-                    SaveOptionsToFile("options.xml");
-                    return;
-            }
-        }
 
         public void SaveOptionsToFile(string filename)
         {

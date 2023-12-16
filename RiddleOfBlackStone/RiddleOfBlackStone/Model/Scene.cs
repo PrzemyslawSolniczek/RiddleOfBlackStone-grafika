@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RiddleOfBlackStone.Model
 {
-    public class Scene : INotifyPropertyChanged
+    public class Scene
     {
         public string Description { get; set; } // opis sceny
         public string AsciiArt { get; set; }    // grafika ASCII 
@@ -17,19 +17,6 @@ namespace RiddleOfBlackStone.Model
         public Scene()
         {
             Choices = new List<Choice>();
-        }
-
-        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
-        {
-            add
-            {
-                throw new NotImplementedException();
-            }
-
-            remove
-            {
-                throw new NotImplementedException();
-            }
         }
     }
 }

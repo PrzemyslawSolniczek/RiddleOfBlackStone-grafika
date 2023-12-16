@@ -1,0 +1,23 @@
+﻿<Page x:Class="RiddleOfBlackStone.GamePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:local="clr-namespace:RiddleOfBlackStone"
+      mc:Ignorable="d"
+      Title="GamePage">
+    <Grid>
+        <Image Source="C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\pictures\czarnyKamien.png"/>
+        <ListBox Name="choiceListBox" ItemsSource="{Binding Choices}" SelectionChanged="choiceListBox_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Grid Margin="-30,144,0,0">
+            <TextBlock Text="{Binding CurrentScene.Description}" Margin="170,10,170,0" />
+        </Grid>
+    </Grid>
+</Page>

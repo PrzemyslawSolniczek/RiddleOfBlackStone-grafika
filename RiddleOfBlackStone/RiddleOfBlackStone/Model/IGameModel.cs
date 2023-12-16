@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RiddleOfBlackStone.Model
 {
-    public interface IGameModel : INotifyPropertyChanged
+    public interface IGameModel
     {
         Scene currentScene { get; set; }
         List<Question> quiz { get; set; }

@@ -40,7 +40,7 @@ namespace RiddleOfBlackStone.ViewModel
                 }
             }
         }
-        /*
+        
         public void SaveOptionsToFile(string filename)
         {
             try
@@ -65,7 +65,8 @@ namespace RiddleOfBlackStone.ViewModel
                 throw new Exception(filename, ex);
             }
         }
-        */
+        
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -30,3 +30,7 @@ C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\Riddle
 C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\OptionsPanel.g.cs
 C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\RiddleOfBlackStone_MarkupCompile.lref
 C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\OptionsPanel.baml
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\GameView.g.cs
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\GameView.baml
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\AuthorView.g.cs
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\AuthorView.baml

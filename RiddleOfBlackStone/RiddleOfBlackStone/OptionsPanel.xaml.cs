@@ -22,12 +22,26 @@ namespace RiddleOfBlackStone
     public partial class OptionsPanel : Window
     {
         private readonly MenuViewModel menuViewModel;
+        private readonly OptionsPanelViewModel optionsPanelViewModel;
 
         public OptionsPanel()
         {
             InitializeComponent();
-            menuViewModel = new MenuViewModel(new MenuModel());
-            DataContext = menuViewModel;
+            menuViewModel = new MenuViewModel(new MenuModel(), new GameModel());
+            
+            optionsPanelViewModel = new OptionsPanelViewModel();
+            DataContext = optionsPanelViewModel;
+        }
+        private ListBoxItem FindListBoxItemByContent(ListBox listBox, string content)
+        {
+            foreach (var item in listBox.Items)
+            {
+                if (item is ListBoxItem listBoxItem && listBoxItem.Content.ToString() == content)
+                {
+                    return listBoxItem;
+                }
+            }
+            return null;
         }
         private void MainWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
