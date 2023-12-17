@@ -43,6 +43,7 @@ namespace RiddleOfBlackStone
             }
             return null;
         }
+
         private void MainWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.Escape)

@@ -3,6 +3,7 @@ using RiddleOfBlackStone.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,9 +52,9 @@ namespace RiddleOfBlackStone
             if (selectedIndex >= 0 && selectedIndex < gameViewModel.CurrentScene.Choices.Count)
             {
                 gameViewModel.HandleChoiceSelected(selectedIndex);
-                UpdateChoices(); // Update choices after handling the selection
+                UpdateChoices(); 
             }
-            
+
         }
 
         private void UpdateChoices()

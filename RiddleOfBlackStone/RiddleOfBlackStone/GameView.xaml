@@ -13,6 +13,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+
+        <Frame x:Name="mainFrame"/>
         <Image x:Name ="gameImage" Grid.Row="0" Margin="10"/>
 
         <ListBox Name="choiceListBox" ItemsSource="{Binding Choices}" SelectionChanged="choiceListBox_SelectionChanged" Grid.Row="1">

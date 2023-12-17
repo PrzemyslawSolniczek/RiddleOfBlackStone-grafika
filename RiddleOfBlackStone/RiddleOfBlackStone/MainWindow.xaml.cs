@@ -47,6 +47,7 @@ namespace YourNamespace
                         break;
                     case 1:
                         mainFrame.Navigate(gamePage);
+ 
                         break;
                     case 2:
                         // Odczytaj grę
