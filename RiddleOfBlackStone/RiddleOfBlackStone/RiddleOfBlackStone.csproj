@@ -138,16 +138,20 @@
     <Resource Include="pictures\tlo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="pictures\tajemniczaPostac.png" />
+    <Resource Include="pictures\Opuścić jaskinię.png" />
     <Resource Include="pictures\smok7.png" />
     <Resource Include="pictures\archeolog2.png" />
     <Resource Include="pictures\czarnyKamien.png" />
-    <Resource Include="pictures\jaskinia.png" />
-    <Resource Include="pictures\laboratorium3.png" />
     <Resource Include="pictures\ladowanie ekranu.png" />
     <Resource Include="pictures\pochodnia.png" />
-    <Resource Include="pictures\pustynia.png" />
-    <Resource Include="pictures\roslina2.png" />
+    <Resource Include="pictures\Wykorzystać technologię.png" />
+    <Resource Include="pictures\Wrócić z kamieniem.png" />
+    <Resource Include="pictures\Sprzedać kamień.png" />
+    <Resource Include="pictures\Ukryć kamień.png" />
+    <Resource Include="pictures\Wejść w przejście.png" />
+    <Resource Include="pictures\Kontynuować badanie.png" />
+    <Resource Include="pictures\Przyjrzeć się kamieniowi.png" />
+    <Resource Include="pictures\Włożyć kamień na ołtarz.png" />
     <Content Include="Sound\WelcomeScreen.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

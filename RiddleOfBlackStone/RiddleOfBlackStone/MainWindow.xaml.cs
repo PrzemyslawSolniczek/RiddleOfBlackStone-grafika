@@ -52,9 +52,11 @@ namespace YourNamespace
                         // Odczytaj grę
                         break;
                     case 3:
+                    var authorView = new AuthorView();
                         authorView.ShowDialog();
                         break;
                     case 4:
+                        var optionsPanel = new OptionsPanel();
                         optionsPanel.ShowDialog();
                         // Opcje
                         break;

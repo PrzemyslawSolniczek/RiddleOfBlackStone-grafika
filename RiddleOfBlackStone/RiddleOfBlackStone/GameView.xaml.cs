@@ -31,7 +31,8 @@ namespace RiddleOfBlackStone
             gameViewModel.CurrentScene = ScenesViewModel.InitializeStory();
             DataContext = gameViewModel;
             gameViewModel.Choices = new ObservableCollection<string>();
-            UpdateChoices();
+            gameImage.Source = new BitmapImage(new Uri("pictures/czarnyKamien.png", UriKind.Relative));
+
             for (int i = 0; i < gameViewModel.CurrentScene.Choices.Count; i++)
                 gameViewModel.Choices.Add(gameViewModel.CurrentScene.Choices[i].Description);
 
@@ -39,12 +40,20 @@ namespace RiddleOfBlackStone
         private void choiceListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int selectedIndex = choiceListBox.SelectedIndex;
+            string selectedChoice = choiceListBox.SelectedItem as string;
+
+            if (!string.IsNullOrEmpty(selectedChoice))
+            {
+                string imagePath = $"pictures/{selectedChoice}.png";
+                gameImage.Source = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+            }
 
             if (selectedIndex >= 0 && selectedIndex < gameViewModel.CurrentScene.Choices.Count)
             {
                 gameViewModel.HandleChoiceSelected(selectedIndex);
                 UpdateChoices(); // Update choices after handling the selection
             }
+            
         }
 
         private void UpdateChoices()

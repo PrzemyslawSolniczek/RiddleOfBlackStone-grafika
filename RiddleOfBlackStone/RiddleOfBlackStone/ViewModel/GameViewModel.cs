@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace RiddleOfBlackStone.ViewModel
 {
@@ -31,6 +32,16 @@ namespace RiddleOfBlackStone.ViewModel
             }
         }
 
+        private BitmapImage _Source;
+        public BitmapImage Source
+        {
+            get { return _Source; }
+            set
+            {
+                _Source = value;
+                OnPropertyChanged(nameof(Source));
+            }
+        }
 
         public Scene CurrentScene
         {
