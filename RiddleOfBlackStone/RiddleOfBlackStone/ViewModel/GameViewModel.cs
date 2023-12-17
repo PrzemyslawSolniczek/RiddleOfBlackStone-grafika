@@ -1,4 +1,5 @@
-﻿using RiddleOfBlackStone.Model;
+﻿using RiddleOfBlackStone.Command;
+using RiddleOfBlackStone.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,6 +7,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace RiddleOfBlackStone.ViewModel
@@ -43,6 +47,21 @@ namespace RiddleOfBlackStone.ViewModel
             }
         }
 
+        private RelayCommand _choiceSelectedCommand;
+        public ICommand ChoiceSelectedCommand
+        {
+            get
+            {
+                if (_choiceSelectedCommand == null)
+                {
+                    _choiceSelectedCommand = new RelayCommand(
+                        param => HandleChoiceSelected((int)param),
+                        param => true
+                    );
+                }
+                return _choiceSelectedCommand;
+            }
+        }
         public Scene CurrentScene
         {
             get { return gameModel.currentScene; }
@@ -173,6 +192,18 @@ namespace RiddleOfBlackStone.ViewModel
             }
         }
 
+        private int selectedChoiceIndex;
+        public int SelectedChoiceIndex
+        {
+            get { return selectedChoiceIndex; }
+            set
+            {
+                selectedChoiceIndex = value;
+                OnPropertyChanged(nameof(SelectedChoiceIndex));
+                OnPropertyChanged(nameof(DisplayedChoices));
+            }
+        }
+
         public void DisplayChoicesWithHighlight(int choiceIndex)
         {
             for (int i = 0; i < CurrentScene.Choices.Count; i++)
@@ -208,18 +239,65 @@ namespace RiddleOfBlackStone.ViewModel
         public void StartGame()
         {
             CurrentScene = ScenesViewModel.InitializeStory();
+            string initialChoice = "czarnyKamien";
+            string initialImagePath = $"pictures/{initialChoice}.png";
+            Source = new BitmapImage(new Uri(initialImagePath, UriKind.Relative));
+            OnPropertyChanged(nameof(Source));
         }
         public void HandleChoiceSelected(int choiceIndex)
         {
             if (CurrentScene != null && choiceIndex >= 0 && choiceIndex < CurrentScene.Choices.Count)
             {
+                string selectedChoice = CurrentScene.Choices[choiceIndex].Description;
+                string imagePath = $"pictures/{selectedChoice}.png";
+                Source = new BitmapImage(new Uri(imagePath, UriKind.Relative));
                 Scene newScene = CurrentScene.Choices[choiceIndex].NextScene;
                 if (newScene != null)
                 {
                     CurrentScene = newScene;
                 }
+                OnPropertyChanged(nameof(Source));
+            }
+            SelectedChoiceIndex = choiceIndex;
+            UpdateChoices();
+        }
+        private void UpdateChoices()
+        {
+            Choices.Clear();
+
+            if (CurrentScene != null)
+            {
+                for (int i = 0; i < CurrentScene.Choices.Count; i++)
+                {
+                    Choices.Add(CurrentScene.Choices[i].Description);
+                }
+            }
+            OnPropertyChanged(nameof(DisplayedChoices));
+        }
+
+        public ObservableCollection<string> DisplayedChoices
+        {
+            get
+            {
+                var displayedChoices = new ObservableCollection<string>();
+
+                for (int i = 0; i < CurrentScene.Choices.Count; i++)
+                {
+                    var choice = CurrentScene.Choices[i];
+
+                    string displayedChoice = CurrentScene.Choices[i].Description;
+
+                    if (i == SelectedChoiceIndex)
+                    {
+                        displayedChoice = $">> {choice.Description}";
+                    }
+
+                    displayedChoices.Add(displayedChoice);
+                }
+                return displayedChoices;
             }
         }
+
 
         protected virtual void OnPropertyChanged(string propertyName)
         {

@@ -4,6 +4,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:local="clr-namespace:RiddleOfBlackStone"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      
       mc:Ignorable="d"
       Title="GamePage">
     <Grid>
@@ -15,14 +17,19 @@
 
 
         <Frame x:Name="mainFrame"/>
-        <Image x:Name ="gameImage" Grid.Row="0" Margin="10"/>
+        <Image x:Name ="gameImage" Grid.Row="0" Margin="10" Source="{Binding Source}"/>
 
-        <ListBox Name="choiceListBox" ItemsSource="{Binding Choices}" SelectionChanged="choiceListBox_SelectionChanged" Grid.Row="1">
+        <ListBox Name="choiceListBox" ItemsSource="{Binding DisplayedChoices}" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding ChoiceSelectedCommand}" CommandParameter="{Binding SelectedIndex, ElementName=choiceListBox}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </ListBox>
 
         <Grid Grid.Row="2">

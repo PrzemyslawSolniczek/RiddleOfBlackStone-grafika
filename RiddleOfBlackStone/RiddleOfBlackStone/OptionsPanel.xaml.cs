@@ -30,30 +30,10 @@ namespace RiddleOfBlackStone
             menuViewModel = new MenuViewModel(new MenuModel(), new GameModel());
             
             optionsPanelViewModel = new OptionsPanelViewModel();
-            //optionsPanelViewModel.Music = true;
-            //optionsPanelViewModel.DisplayTextLetterByLetter = true;
             
             DataContext = optionsPanelViewModel;
         }
-        private ListBoxItem FindListBoxItemByContent(ListBox listBox, string content)
-        {
-            foreach (var item in listBox.Items)
-            {
-                if (item is ListBoxItem listBoxItem && listBoxItem.Content.ToString() == content)
-                {
-                    return listBoxItem;
-                }
-            }
-            return null;
-        }
-
-        private void MainWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == Key.Escape)
-            {
-                Close();
-            }
-        }
+       
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             optionsPanelViewModel.SaveOptionsToFile("options.xml");

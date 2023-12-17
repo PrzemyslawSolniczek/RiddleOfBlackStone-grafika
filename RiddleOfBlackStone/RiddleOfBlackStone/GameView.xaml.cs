@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Xaml.Behaviors;
 
 namespace RiddleOfBlackStone
 {
@@ -28,16 +29,16 @@ namespace RiddleOfBlackStone
         {
             InitializeComponent();
             gameViewModel = _gameViewModel;
-            gameViewModel = new GameViewModel(new GameModel());
-            gameViewModel.CurrentScene = ScenesViewModel.InitializeStory();
-            DataContext = gameViewModel;
+            gameViewModel.StartGame();
             gameViewModel.Choices = new ObservableCollection<string>();
-            gameImage.Source = new BitmapImage(new Uri("pictures/czarnyKamien.png", UriKind.Relative));
+            DataContext = gameViewModel;
+            //gameImage.Source = new BitmapImage(new Uri("pictures/czarnyKamien.png", UriKind.Relative));
 
-            for (int i = 0; i < gameViewModel.CurrentScene.Choices.Count; i++)
-                gameViewModel.Choices.Add(gameViewModel.CurrentScene.Choices[i].Description);
+           // for (int i = 0; i < gameViewModel.CurrentScene.Choices.Count; i++)
+              //  gameViewModel.Choices.Add(gameViewModel.CurrentScene.Choices[i].Description);
 
         }
+        /*
         private void choiceListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int selectedIndex = choiceListBox.SelectedIndex;
@@ -66,10 +67,10 @@ namespace RiddleOfBlackStone
                 gameViewModel.Choices.Add(choice.Description);
             }
         }
+        /*
         public void DisplayChoices(int choices)
         {
             //choiceListBox.Items.Clear();
-
             for (int i = 0; i < gameViewModel.CurrentScene.Choices.Count; i++)
             {
                 var choice = gameViewModel.CurrentScene.Choices[i];
@@ -88,5 +89,6 @@ namespace RiddleOfBlackStone
 
             //gameViewModel.DisplayChoicesWithHighlight(2);
         }
+        */
     }
 }
