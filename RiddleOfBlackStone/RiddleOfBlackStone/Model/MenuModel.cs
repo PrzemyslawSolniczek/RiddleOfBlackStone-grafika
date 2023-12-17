@@ -25,7 +25,7 @@ namespace RiddleOfBlackStone.Model
             _appState = new AppState();
             _endOfGame = false;
             _userChoice = 0;
-            _music = true;
+            _music = false;
             _loaded = false;
             _loadGame = "Wczytaj grę";
         }

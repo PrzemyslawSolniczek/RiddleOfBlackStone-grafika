@@ -1,4 +1,4 @@
 <Options>
-  <Music>True</Music>
-  <DisplayMode>False</DisplayMode>
+  <Music>False</Music>
+  <DisplayMode>True</DisplayMode>
 </Options>

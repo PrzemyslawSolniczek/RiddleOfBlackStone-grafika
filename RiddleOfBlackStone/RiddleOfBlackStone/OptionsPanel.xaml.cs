@@ -30,6 +30,9 @@ namespace RiddleOfBlackStone
             menuViewModel = new MenuViewModel(new MenuModel(), new GameModel());
             
             optionsPanelViewModel = new OptionsPanelViewModel();
+            //optionsPanelViewModel.Music = true;
+            //optionsPanelViewModel.DisplayTextLetterByLetter = true;
+            
             DataContext = optionsPanelViewModel;
         }
         private ListBoxItem FindListBoxItemByContent(ListBox listBox, string content)
@@ -53,7 +56,7 @@ namespace RiddleOfBlackStone
         }
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            menuViewModel.SaveOptionsToFile("options.xml");
+            optionsPanelViewModel.SaveOptionsToFile("options.xml");
             MessageBox.Show("Zapisano zmiany.");
         }
     }

@@ -2,10 +2,12 @@
 using RiddleOfBlackStone.Command;
 using RiddleOfBlackStone.Model;
 using RiddleOfBlackStone.ViewModel;
+using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace YourNamespace
 {
@@ -14,7 +16,6 @@ namespace YourNamespace
         private readonly MenuViewModel menuViewModel;
         private readonly OptionsPanelViewModel optionsPanelViewModel;
         private readonly GameViewModel gameViewModel;
-        private bool isProgrammaticSelection = false;
 
 
         OptionsPanel optionsPanel = new OptionsPanel();
@@ -29,15 +30,24 @@ namespace YourNamespace
             gameViewModel = new GameViewModel(new GameModel());
             gamePage = new GamePage(gameViewModel);
             DataContext = menuViewModel;
-            
             menuViewModel.Path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Sound\WelcomeScreen.wav";
             menuViewModel.SoundPlayer.SoundLocation = menuViewModel.Path;
-            //menuViewModel.SoundPlayer.PlayLooping();
-            // Ustawienie początkowego zaznaczenia
+            MediaElement();
             menuListBox.SelectedIndex = 0;
             DataContext = menuViewModel;
         }
 
+        private void MediaElement()
+        {
+            if (optionsPanelViewModel.StopAndPlay())
+            {
+                mediaElement.Source = new Uri(menuViewModel.SoundPlayer.SoundLocation, UriKind.Relative);
+            }
+            else
+            {
+                mediaElement.Source = null;
+            }
+        }
         private void MenuListBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
             int selectedIndex = menuListBox.SelectedIndex;
@@ -57,10 +67,12 @@ namespace YourNamespace
                         authorView.ShowDialog();
                         break;
                     case 4:
+                        optionsPanelViewModel.SaveOptionsToFile("options.xml");
                         var optionsPanel = new OptionsPanel();
                         optionsPanel.ShowDialog();
-                        // Opcje
-                        break;
+                        MediaElement();
+                    // Opcje
+                    break;
                     case 5:
                         // Wyjdź z gry
                         Close();
