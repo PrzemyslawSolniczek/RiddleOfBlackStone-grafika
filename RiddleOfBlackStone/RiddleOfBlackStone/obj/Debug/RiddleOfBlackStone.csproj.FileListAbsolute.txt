@@ -34,3 +34,11 @@ C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\Riddle
 C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\GameView.baml
 C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\AuthorView.g.cs
 C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\AuthorView.baml
+D:\Studia\Semestr V\KCK\Tryb graficzny\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\AuthorView.g.cs
+D:\Studia\Semestr V\KCK\Tryb graficzny\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\GameView.g.cs
+D:\Studia\Semestr V\KCK\Tryb graficzny\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\OptionsPanel.g.cs
+D:\Studia\Semestr V\KCK\Tryb graficzny\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\RiddleOfBlackStone_Content.g.cs
+D:\Studia\Semestr V\KCK\Tryb graficzny\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\RiddleOfBlackStone_MarkupCompile.lref
+D:\Studia\Semestr V\KCK\Tryb graficzny\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\AuthorView.baml
+D:\Studia\Semestr V\KCK\Tryb graficzny\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\GameView.baml
+D:\Studia\Semestr V\KCK\Tryb graficzny\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\OptionsPanel.baml
