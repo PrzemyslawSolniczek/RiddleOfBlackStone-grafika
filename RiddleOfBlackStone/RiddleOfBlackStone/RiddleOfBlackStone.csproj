@@ -158,6 +158,10 @@
     <Resource Include="pictures\Włożyć kamień na ołtarz.png" />
     <Resource Include="pictures\okienko1.jpg" />
     <Resource Include="pictures\okienko2.jpg" />
+    <Resource Include="pictures\statua2.jpg" />
+    <Resource Include="pictures\statua22.jpg" />
+    <Resource Include="pictures\statua22_transparent.png" />
+    <Resource Include="pictures\statua2_transparent.png" />
     <Content Include="Sound\WelcomeScreen.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

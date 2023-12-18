@@ -46,3 +46,7 @@ C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\Riddle
 C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\bin\Debug\Microsoft.Xaml.Behaviors.pdb
 C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\bin\Debug\Microsoft.Xaml.Behaviors.xml
 C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\RiddleOfBlackStone.csproj.CopyComplete
+D:\Studia\Semestr V\KCK\Tryb graficzny\RiddleOfBlackStone\RiddleOfBlackStone\bin\Debug\Microsoft.Xaml.Behaviors.dll
+D:\Studia\Semestr V\KCK\Tryb graficzny\RiddleOfBlackStone\RiddleOfBlackStone\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+D:\Studia\Semestr V\KCK\Tryb graficzny\RiddleOfBlackStone\RiddleOfBlackStone\bin\Debug\Microsoft.Xaml.Behaviors.xml
+D:\Studia\Semestr V\KCK\Tryb graficzny\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\RiddleOfBlackStone.csproj.CopyComplete
