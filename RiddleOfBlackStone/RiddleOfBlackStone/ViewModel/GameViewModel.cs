@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -308,6 +309,7 @@ namespace RiddleOfBlackStone.ViewModel
             SelectedChoiceIndex = choiceIndex;
             UpdateChoices();
         }
+
         private void UpdateChoices()
         {
             Choices.Clear();
@@ -345,6 +347,7 @@ namespace RiddleOfBlackStone.ViewModel
             }
         }
 
+        
 
         protected virtual void OnPropertyChanged(string propertyName)
         {

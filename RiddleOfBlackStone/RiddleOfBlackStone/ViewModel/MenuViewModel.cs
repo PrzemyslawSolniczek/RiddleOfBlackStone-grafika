@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+using System.IO;
 using System.Linq;
 using System.Media;
 using System.Runtime.CompilerServices;
@@ -21,6 +22,7 @@ namespace RiddleOfBlackStone.ViewModel
         private readonly IGameModel _gameModel;
         private GameViewModel gameViewModel;
 
+        
 
         public MenuViewModel(IMenuModel menuModel, IGameModel gameModel)
         {
@@ -29,6 +31,8 @@ namespace RiddleOfBlackStone.ViewModel
             _gameModel = gameModel;
            // Enter = new RelayCommand(p => HandleEnter());
         }
+        public ICommand SaveCommand => new RelayCommand(p => Save(_gameModel));
+        public ICommand LoadCommand => new RelayCommand(p => Load(_gameModel));
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -100,7 +104,7 @@ namespace RiddleOfBlackStone.ViewModel
             }
         }
 
-        public string Path
+        public string PathToMusic
         {
             get { return _menuModel.Path; }
             set
@@ -239,6 +243,45 @@ namespace RiddleOfBlackStone.ViewModel
             }
         }
 
+        public void Save(IGameModel emp)
+        {
+            AppState appState = new AppState
+            {
+                Scene = emp.currentScene,
+                Lives = emp.player.Lives,
+                sum = emp.sum
+            };
+            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(appState.GetType());
+            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            using (StreamWriter output = new StreamWriter(Path.Combine(docPath, "save.xml")))
+            {
+                x.Serialize(output, appState);
+            }
+        }
+        public Scene Load(IGameModel emp)
+        {
+            AppState appState = new AppState
+            {
+                Scene = emp.currentScene,
+                Lives = emp.player.Lives,
+                sum = emp.sum
+            };
+            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(appState.GetType());
+            emp.isLoaded = true;
+            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string filePath = Path.Combine(docPath, "save.xml");
+            if (File.Exists(filePath))
+            {
+                using (StreamReader output = new StreamReader(filePath))
+                {
+                    var loadedScene = (AppState)x.Deserialize(output);
+                    emp.currentScene = loadedScene.Scene;
+                    emp.player.Lives = loadedScene.Lives;
+                    emp.sum = loadedScene.sum;
+                }
+            }
+            return emp.currentScene;
+        }
         public void HandleUserChoice()
         {
             switch (UserChoice)

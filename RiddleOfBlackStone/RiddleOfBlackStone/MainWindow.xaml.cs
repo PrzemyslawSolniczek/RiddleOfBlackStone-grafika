@@ -29,8 +29,8 @@ namespace YourNamespace
             menuViewModel = new MenuViewModel(new MenuModel(), new GameModel());
             gameViewModel = new GameViewModel(new GameModel());
             DataContext = menuViewModel;
-            menuViewModel.Path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Sound\WelcomeScreen.wav";
-            menuViewModel.SoundPlayer.SoundLocation = menuViewModel.Path;
+            menuViewModel.PathToMusic = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Sound\WelcomeScreen.wav";
+            menuViewModel.SoundPlayer.SoundLocation = menuViewModel.PathToMusic;
             MediaElement();
             menuListBox.SelectedIndex = 0;
             DataContext = menuViewModel;
@@ -59,7 +59,7 @@ namespace YourNamespace
                         mainFrame.Navigate(gamePage);
                         break;
                     case 2:
-                        // Odczytaj grę
+                       // menuViewModel.Load(new GameModel());
                         break;
                     case 3:
                     var authorView = new AuthorView();
