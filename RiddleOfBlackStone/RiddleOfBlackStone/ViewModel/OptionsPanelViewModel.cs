@@ -105,7 +105,7 @@ namespace RiddleOfBlackStone.ViewModel
             }
         }
 
-        private void LoadOptionsFromFile(string filename)
+        public void LoadOptionsFromFile(string filename)
         {
             try
             {

@@ -28,7 +28,6 @@ namespace YourNamespace
             optionsPanelViewModel = new OptionsPanelViewModel();
             menuViewModel = new MenuViewModel(new MenuModel(), new GameModel());
             gameViewModel = new GameViewModel(new GameModel());
-            gamePage = new GamePage(gameViewModel);
             DataContext = menuViewModel;
             menuViewModel.Path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Sound\WelcomeScreen.wav";
             menuViewModel.SoundPlayer.SoundLocation = menuViewModel.Path;
@@ -56,8 +55,8 @@ namespace YourNamespace
                     case 0:
                         break;
                     case 1:
+                        gamePage = new GamePage(gameViewModel);
                         mainFrame.Navigate(gamePage);
- 
                         break;
                     case 2:
                         // Odczytaj grę

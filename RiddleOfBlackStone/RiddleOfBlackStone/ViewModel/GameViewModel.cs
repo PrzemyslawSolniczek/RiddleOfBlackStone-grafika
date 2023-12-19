@@ -11,13 +11,17 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace RiddleOfBlackStone.ViewModel
 {
     public class GameViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        private DispatcherTimer textDisplayTimer;
+        private int currentTextLength;
         private readonly IGameModel gameModel;
+        private OptionsPanelViewModel optionsPanelViewModel = new OptionsPanelViewModel();
 
         public GameViewModel(IGameModel gameModel)
         {
@@ -165,6 +169,16 @@ namespace RiddleOfBlackStone.ViewModel
                 }
             }
         }
+        private string _textDescription;
+        public string TextDescription
+        {
+            get { return _textDescription; }
+            set
+            {
+                _textDescription = value;
+                OnPropertyChanged(nameof(TextDescription));
+            }
+        }
 
         public Player Player
         {
@@ -204,6 +218,8 @@ namespace RiddleOfBlackStone.ViewModel
             }
         }
 
+
+
         public void DisplayChoicesWithHighlight(int choiceIndex)
         {
             for (int i = 0; i < CurrentScene.Choices.Count; i++)
@@ -221,27 +237,54 @@ namespace RiddleOfBlackStone.ViewModel
             }
         }
 
-        /*
-        private void UpdateChoices()
+        private void InitializeTimer()
         {
-            Choices.Clear();
-
-            if (CurrentScene != null)
-            {
-                for (int i = 0; i < CurrentScene.Choices.Count; i++)
-                {
-                    Choices.Add(CurrentScene.Choices[i].Description);
-                }
-            }
+            textDisplayTimer = new DispatcherTimer();
+            //Generalnie to 0.3 - 0.1 to optymalne wartości, bo jak się daję więcej, to views nie nadąża ze zmianami
+            textDisplayTimer.Interval = TimeSpan.FromMilliseconds(0.3);
+            textDisplayTimer.Tick += TextDisplayTimer_Tick;
         }
-        */
+
+        private void StartTextDisplayTimer(string text)
+        {
+            currentTextLength = 0;
+            textDisplayTimer.Stop();
+            textDisplayTimer.Start();
+        }
+
+        private void TextDisplayTimer_Tick(object sender, EventArgs e)
+        {
+            int remainingCharacters = CurrentScene.Description.Length - currentTextLength;
+
+            if (remainingCharacters > 0)
+            {
+                TextDescription = CurrentScene.Description.Substring(0, currentTextLength);
+                ++currentTextLength;
+            }
+            else
+            {
+                textDisplayTimer.Stop(); 
+            }
+            
+        }
 
         public void StartGame()
         {
             CurrentScene = ScenesViewModel.InitializeStory();
+            optionsPanelViewModel.LoadOptionsFromFile("options.xml");
             string initialChoice = "czarnyKamien";
             string initialImagePath = $"pictures/{initialChoice}.png";
             Source = new BitmapImage(new Uri(initialImagePath, UriKind.Relative));
+            if (optionsPanelViewModel.DisplayTextLetterByLetter)
+            {
+                InitializeTimer();
+                StartTextDisplayTimer(CurrentScene.Description);
+            }
+            else
+            {
+                TextDescription = CurrentScene.Description;
+            }
+
             OnPropertyChanged(nameof(Source));
         }
         public void HandleChoiceSelected(int choiceIndex)
@@ -256,7 +299,11 @@ namespace RiddleOfBlackStone.ViewModel
                 {
                     CurrentScene = newScene;
                 }
-                OnPropertyChanged(nameof(Source));
+                if(optionsPanelViewModel.DisplayTextLetterByLetter)
+                    StartTextDisplayTimer(CurrentScene.Description);
+                else 
+                    TextDescription = CurrentScene.Description;
+                    OnPropertyChanged(nameof(Source));
             }
             SelectedChoiceIndex = choiceIndex;
             UpdateChoices();
