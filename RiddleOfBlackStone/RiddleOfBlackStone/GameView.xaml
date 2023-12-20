@@ -5,9 +5,12 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:local="clr-namespace:RiddleOfBlackStone"
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-      
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+
       mc:Ignorable="d"
       Title="GamePage" Width="568">
+
+
     <Grid Height="497">
         <Grid.RowDefinitions>
             <RowDefinition Height="400"/>
@@ -15,13 +18,23 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-
         <Frame x:Name="mainFrame"/>
         <Image x:Name ="gameImage" Grid.Row="0" Margin="90,10,87,72" Source="{Binding Source}"/>
-
-        <TextBlock Text="{Binding TextDescription}" Margin="10,328,10,66" Foreground="White" FontSize="15" Grid.RowSpan="3"/>
-
-
+        <TextBlock x:Name="TextDescription" Text="{Binding TextDescription}" Margin="10,328,10,66" Foreground="White" FontSize="15" Grid.RowSpan="3">
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                            Storyboard.TargetProperty="Opacity"
+                            From="0"
+                            To="1"
+                            Duration="0:0:2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
         <ListBox Name="choiceListBox" ItemsSource="{Binding DisplayedChoices}" Grid.Row="1" VerticalAlignment="Top" Height="51" Foreground="#FFCC00" Background="#2c1b01" Margin="0,36,0,0" Grid.RowSpan="2" >
             <ListBox.ItemTemplate>
                 <DataTemplate>

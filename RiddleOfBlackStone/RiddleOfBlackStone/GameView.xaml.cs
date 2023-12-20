@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Xaml.Behaviors;
+using System.Windows.Media.Animation;
 
 namespace RiddleOfBlackStone
 {
@@ -32,11 +33,34 @@ namespace RiddleOfBlackStone
             gameViewModel.StartGame();
             gameViewModel.Choices = new ObservableCollection<string>();
             DataContext = gameViewModel;
-            //gameImage.Source = new BitmapImage(new Uri("pictures/czarnyKamien.png", UriKind.Relative));
+            choiceListBox.SelectionChanged += ChoiceListBox_SelectionChanged;
+            TextDescription.Loaded += TextDescription_Loaded;
+        }
+        private void TextDescription_Loaded(object sender, RoutedEventArgs e)
+        {
+            DoubleAnimation opacityAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = TimeSpan.FromSeconds(2)
+            };
 
-           // for (int i = 0; i < gameViewModel.CurrentScene.Choices.Count; i++)
-              //  gameViewModel.Choices.Add(gameViewModel.CurrentScene.Choices[i].Description);
+            TextDescription.BeginAnimation(TextBlock.OpacityProperty, opacityAnimation);
+        }
 
+        private void ChoiceListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Perform the choice selection logic here
+
+            // Start subsequent animations when a choice is made
+            DoubleAnimation opacityAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = TimeSpan.FromSeconds(2)
+            };
+
+            TextDescription.BeginAnimation(TextBlock.OpacityProperty, opacityAnimation);
         }
         /*
         private void choiceListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

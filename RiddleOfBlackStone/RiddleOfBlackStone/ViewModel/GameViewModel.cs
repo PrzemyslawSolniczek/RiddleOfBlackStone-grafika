@@ -20,6 +20,7 @@ using System.Windows.Threading;
 using YourNamespace;
 using static System.Net.Mime.MediaTypeNames;
 using Application = System.Windows.Application;
+using System.Windows.Media.Animation;
 
 namespace RiddleOfBlackStone.ViewModel
 {
@@ -257,7 +258,7 @@ namespace RiddleOfBlackStone.ViewModel
         private void InitializeTimer()
         {
             textDisplayTimer = new DispatcherTimer();
-            textDisplayTimer.Interval = TimeSpan.FromMilliseconds(0.3);
+            textDisplayTimer.Interval = TimeSpan.FromMilliseconds(10);
             textDisplayTimer.Tick += TextDisplayTimer_Tick;
         }
 
@@ -479,6 +480,7 @@ namespace RiddleOfBlackStone.ViewModel
         {
             NavigationBackRequested?.Invoke(this, EventArgs.Empty);
         }
+
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
