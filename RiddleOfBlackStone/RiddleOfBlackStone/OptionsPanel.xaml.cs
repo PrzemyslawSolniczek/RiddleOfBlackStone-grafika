@@ -27,7 +27,6 @@ namespace RiddleOfBlackStone
         public OptionsPanel()
         {
             InitializeComponent();
-            menuViewModel = new MenuViewModel(new MenuModel(), new GameModel());
             
             optionsPanelViewModel = new OptionsPanelViewModel();
             

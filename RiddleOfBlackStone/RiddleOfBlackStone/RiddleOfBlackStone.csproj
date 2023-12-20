@@ -72,9 +72,15 @@
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Question.cs" />
     <Compile Include="Model\Quiz.cs" />
+    <Compile Include="Model\QuizInitializer.cs" />
     <Compile Include="OptionsPanel.xaml.cs">
       <DependentUpon>OptionsPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="QuizPage.xaml.cs">
+      <DependentUpon>QuizPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\QuestionViewModel.cs" />
+    <Compile Include="ViewModel\QuizViewModel.cs" />
     <Compile Include="ViewModel\AnswerViewModel.cs" />
     <Compile Include="ViewModel\GameViewModel.cs" />
     <Compile Include="ViewModel\MenuViewModel.cs" />
@@ -102,6 +108,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="OptionsPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="QuizPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -142,7 +152,6 @@
     <Resource Include="pictures\tlo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="pictures\Opuścić jaskinię.png" />
     <Resource Include="pictures\smok7.png" />
     <Resource Include="pictures\archeolog2.png" />
     <Resource Include="pictures\czarnyKamien.png" />
@@ -162,6 +171,7 @@
     <Resource Include="pictures\statua22.jpg" />
     <Resource Include="pictures\statua22_transparent.png" />
     <Resource Include="pictures\statua2_transparent.png" />
+    <Resource Include="pictures\Opuścić jaskinię.png" />
     <Content Include="Sound\WelcomeScreen.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,7 +10,7 @@ namespace RiddleOfBlackStone.Model
     {
         public string Description { get; set; }
         public List<Answer> Answers { get; set; }
-        public string correctAnswer { get; set; }
+        public bool correctAnswer { get; set; }
 
     }
 }

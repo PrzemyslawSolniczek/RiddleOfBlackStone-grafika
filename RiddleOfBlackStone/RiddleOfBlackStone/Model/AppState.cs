@@ -13,5 +13,6 @@ namespace RiddleOfBlackStone.Model
         public Scene Scene { get; set; }
         public int Lives { get; set; }
         public int sum { get; set; }
+        public string ImagePath { get; set; }
     }
 }

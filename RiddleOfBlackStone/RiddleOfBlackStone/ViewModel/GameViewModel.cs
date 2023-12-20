@@ -4,28 +4,41 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Threading;
+using YourNamespace;
+using static System.Net.Mime.MediaTypeNames;
+using Application = System.Windows.Application;
 
 namespace RiddleOfBlackStone.ViewModel
 {
     public class GameViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler NavigationBackRequested;
         private DispatcherTimer textDisplayTimer;
         private int currentTextLength;
         private readonly IGameModel gameModel;
+        private MainWindow menuView;
+        private QuizViewModel quizViewModel = new QuizViewModel();
         private OptionsPanelViewModel optionsPanelViewModel = new OptionsPanelViewModel();
-
-        public GameViewModel(IGameModel gameModel)
+        //public ICommand SaveCommand => new RelayCommand(p => Save());
+        //public ICommand LoadCommand => new RelayCommand(p => Load());
+        public GameViewModel(IGameModel gameModel, MainWindow menuView)
         {
+            this.menuView = menuView;
+            //menuView = _MenuView;
             this.gameModel = gameModel;
         }
 
@@ -131,6 +144,7 @@ namespace RiddleOfBlackStone.ViewModel
                 }
             }
         }
+       
 
         public int ChoiceIndex
         {
@@ -194,6 +208,7 @@ namespace RiddleOfBlackStone.ViewModel
             }
         }
 
+
         public int R
         {
             get { return gameModel.r; }
@@ -204,6 +219,17 @@ namespace RiddleOfBlackStone.ViewModel
                     gameModel.r = value;
                     OnPropertyChanged(nameof(R));
                 }
+            }
+        }
+
+        private string imagePath;
+        public string ImagePath
+        {
+            get { return imagePath; }
+            set
+            {
+                imagePath = value;
+                OnPropertyChanged(nameof(ImagePath));
             }
         }
 
@@ -218,30 +244,19 @@ namespace RiddleOfBlackStone.ViewModel
                 OnPropertyChanged(nameof(DisplayedChoices));
             }
         }
-
-
-
-        public void DisplayChoicesWithHighlight(int choiceIndex)
+        private string previousChoiceIndex;
+        public string PreviousChoiceIndex
         {
-            for (int i = 0; i < CurrentScene.Choices.Count; i++)
+            get { return previousChoiceIndex; }
+            set
             {
-                if (i == choiceIndex)  // jezeli to aktualnie wybrana opcja
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($">> {CurrentScene.Choices[i].Description}");
-                    Console.ResetColor();
-                }
-                else
-                {
-                    Console.WriteLine(CurrentScene.Choices[i].Description);
-                }
+                previousChoiceIndex = value;
+                OnPropertyChanged(nameof(PreviousChoiceIndex));
             }
         }
-
         private void InitializeTimer()
         {
             textDisplayTimer = new DispatcherTimer();
-            //Generalnie to 0.3 - 0.1 to optymalne wartości, bo jak się daję więcej, to views nie nadąża ze zmianami
             textDisplayTimer.Interval = TimeSpan.FromMilliseconds(0.3);
             textDisplayTimer.Tick += TextDisplayTimer_Tick;
         }
@@ -269,47 +284,119 @@ namespace RiddleOfBlackStone.ViewModel
             
         }
 
-        public void StartGame()
-        {
-            CurrentScene = ScenesViewModel.InitializeStory();
-            optionsPanelViewModel.LoadOptionsFromFile("options.xml");
-            string initialChoice = "czarnyKamien";
-            string initialImagePath = $"pictures/{initialChoice}.png";
-            Source = new BitmapImage(new Uri(initialImagePath, UriKind.Relative));
-            if (optionsPanelViewModel.DisplayTextLetterByLetter)
+            public void StartGame()
             {
-                InitializeTimer();
-                StartTextDisplayTimer(CurrentScene.Description);
-            }
-            else
-            {
-                TextDescription = CurrentScene.Description;
-            }
+                Sum = 0;
+                if (IsLoaded)
+                {
+                    CurrentScene = Load();
+                    Source = new BitmapImage(new Uri(ImagePath, UriKind.Relative));
+                    if (optionsPanelViewModel.DisplayTextLetterByLetter)
+                    {
+                        InitializeTimer();
+                        StartTextDisplayTimer(CurrentScene.Description);
+                    }
+                    else
+                    {
+                        TextDescription = CurrentScene.Description;
+                    }
 
-            OnPropertyChanged(nameof(Source));
-        }
+                    OnPropertyChanged(nameof(CurrentScene));
+                    OnPropertyChanged(nameof(Source));
+                    return;
+                }
+                else
+                {
+                    CurrentScene = ScenesViewModel.InitializeStory();
+                }
+                optionsPanelViewModel.LoadOptionsFromFile("options.xml");
+            
+                string initialChoice = "czarnyKamien";
+                string initialImagePath = $"pictures/{initialChoice}.png";
+                Source = new BitmapImage(new Uri(initialImagePath, UriKind.Relative));
+                if (optionsPanelViewModel.DisplayTextLetterByLetter)
+                {
+                    InitializeTimer();
+                    StartTextDisplayTimer(CurrentScene.Description);
+                }
+                else
+                {
+                    TextDescription = CurrentScene.Description;
+                }
+                OnPropertyChanged(nameof(Source));
+            }
+        
+       
         public void HandleChoiceSelected(int choiceIndex)
         {
+            Keyboard.ClearFocus();
             if (CurrentScene != null && choiceIndex >= 0 && choiceIndex < CurrentScene.Choices.Count)
             {
+                Sum++;
+                Save();
+                OnPropertyChanged(nameof(Sum));
                 string selectedChoice = CurrentScene.Choices[choiceIndex].Description;
                 string imagePath = $"pictures/{selectedChoice}.png";
+                ImagePath = imagePath;
                 Source = new BitmapImage(new Uri(imagePath, UriKind.Relative));
                 Scene newScene = CurrentScene.Choices[choiceIndex].NextScene;
                 if (newScene != null)
                 {
                     CurrentScene = newScene;
+
                 }
-                if(optionsPanelViewModel.DisplayTextLetterByLetter)
+                if (optionsPanelViewModel.DisplayTextLetterByLetter)
                     StartTextDisplayTimer(CurrentScene.Description);
-                else 
+                else
                     TextDescription = CurrentScene.Description;
-                    OnPropertyChanged(nameof(Source));
+                OnPropertyChanged(nameof(Source));
+                SelectedChoiceIndex = choiceIndex;
+                UpdateChoices();
+
             }
-            SelectedChoiceIndex = choiceIndex;
-            UpdateChoices();
+            if (CurrentScene == null || CurrentScene.Choices.Count == 0)
+            {
+                PrintEndingScene();
+            }
+        }
+        
+        private async void PrintEndingScene()
+        {
+            if (optionsPanelViewModel.DisplayTextLetterByLetter)
+                StartTextDisplayTimer(CurrentScene.Description + "\n" + "Naciśnij przycisk myszki aby powrócić do menu...");
+            else
+                TextDescription = CurrentScene.Description + "\n" + "Naciśnij przycisk myszki aby powrócić do menu...";
+
+            OnPropertyChanged(nameof(Source));
+            var tcs = new TaskCompletionSource<bool>();
+
+            MouseButtonEventHandler mouseButtonDownHandler = null;
+            mouseButtonDownHandler = (sender, args) =>
+            {
+                tcs.SetResult(true);
+                menuView.MouseLeftButtonDown -= mouseButtonDownHandler;
+            };
+
+            menuView.MouseLeftButtonDown += mouseButtonDownHandler;
+
+            await tcs.Task;
+
+            GameEnd();
+            //Task.Delay(3000).ContinueWith(_ => GameEnd());
         }
 
+        private void GameEnd()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                var currentWindow = System.Windows.Application.Current.MainWindow;
+                currentWindow.Close();
+
+                MainWindow menuView = new MainWindow();
+                menuView.Show();
+                System.Windows.Application.Current.MainWindow = menuView;
+            });
+        }
         private void UpdateChoices()
         {
             Choices.Clear();
@@ -321,9 +408,9 @@ namespace RiddleOfBlackStone.ViewModel
                     Choices.Add(CurrentScene.Choices[i].Description);
                 }
             }
+
             OnPropertyChanged(nameof(DisplayedChoices));
         }
-
         public ObservableCollection<string> DisplayedChoices
         {
             get
@@ -338,7 +425,7 @@ namespace RiddleOfBlackStone.ViewModel
 
                     if (i == SelectedChoiceIndex)
                     {
-                        displayedChoice = $">> {choice.Description}";
+                        displayedChoice = choice.Description;
                     }
 
                     displayedChoices.Add(displayedChoice);
@@ -346,8 +433,52 @@ namespace RiddleOfBlackStone.ViewModel
                 return displayedChoices;
             }
         }
+        public void Save()
+        {
+            AppState appState = new AppState
+            {
+                Scene = CurrentScene,
+                Lives = Player.Lives,
+                sum = Sum,
+                ImagePath = ImagePath
+            };
+            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(appState.GetType());
+            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            using (StreamWriter output = new StreamWriter(Path.Combine(docPath, "save.xml")))
+            {
+                x.Serialize(output, appState);
+            }
+        }
+        public Scene Load()
+        {
+            AppState appState = new AppState
+            {
+                Scene = CurrentScene,
+                Lives = Player.Lives,
+                sum = Sum,
+                ImagePath = ImagePath
+            };
+            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(appState.GetType());
+            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string filePath = Path.Combine(docPath, "save.xml");
+            if (File.Exists(filePath))
+            {
+                using (StreamReader output = new StreamReader(filePath))
+                {
+                    var loadedScene = (AppState)x.Deserialize(output);
+                    CurrentScene = loadedScene.Scene;
+                    Player.Lives = loadedScene.Lives;
+                    Sum = loadedScene.sum;
+                    ImagePath = loadedScene.ImagePath;
+                }
+            }
+            return CurrentScene;
+        }
 
-        
+        private void OnNavigationBackRequested()
+        {
+            NavigationBackRequested?.Invoke(this, EventArgs.Empty);
+        }
 
         protected virtual void OnPropertyChanged(string propertyName)
         {

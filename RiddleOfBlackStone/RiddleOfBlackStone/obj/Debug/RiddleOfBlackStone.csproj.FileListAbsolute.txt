@@ -50,3 +50,5 @@ D:\Studia\Semestr V\KCK\Tryb graficzny\RiddleOfBlackStone\RiddleOfBlackStone\bin
 D:\Studia\Semestr V\KCK\Tryb graficzny\RiddleOfBlackStone\RiddleOfBlackStone\bin\Debug\Microsoft.Xaml.Behaviors.pdb
 D:\Studia\Semestr V\KCK\Tryb graficzny\RiddleOfBlackStone\RiddleOfBlackStone\bin\Debug\Microsoft.Xaml.Behaviors.xml
 D:\Studia\Semestr V\KCK\Tryb graficzny\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\RiddleOfBlackStone.csproj.CopyComplete
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\QuizPage.g.cs
+C:\Users\alber\source\repos\RiddleOfBlackStone-grafika\RiddleOfBlackStone\RiddleOfBlackStone\obj\Debug\QuizPage.baml

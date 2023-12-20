@@ -10,5 +10,10 @@ namespace RiddleOfBlackStone.Model
     {
         public int live { get; set; }
         public int attack { get; set; }
+
+        public void AttackPlayer(Player player)
+        {
+            player.Lives -= attack;
+        }
     }
 }

@@ -7,7 +7,6 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 
 namespace YourNamespace
 {
@@ -21,21 +20,31 @@ namespace YourNamespace
         OptionsPanel optionsPanel = new OptionsPanel();
         GamePage gamePage;
         AuthorView authorView = new AuthorView();
+        
         public MainWindow()
         {
             InitializeComponent();
 
             optionsPanelViewModel = new OptionsPanelViewModel();
-            menuViewModel = new MenuViewModel(new MenuModel(), new GameModel());
-            gameViewModel = new GameViewModel(new GameModel());
-            DataContext = menuViewModel;
+            menuViewModel = new MenuViewModel(new MenuModel(), new GameModel(), this);
+            gameViewModel = new GameViewModel(new GameModel(), this);
+            //DataContext = menuViewModel;
             menuViewModel.PathToMusic = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Sound\WelcomeScreen.wav";
             menuViewModel.SoundPlayer.SoundLocation = menuViewModel.PathToMusic;
             MediaElement();
-            menuListBox.SelectedIndex = 0;
+            menuListBox.SelectedIndex = -1;
+            gameViewModel.NavigationBackRequested += HandleNavigationBackRequested;
             DataContext = menuViewModel;
         }
+        private void HandleNavigationBackRequested(object sender, EventArgs e)
+        {
+            GameEnd();
+        }
 
+        private void GameEnd()
+        {
+            mainFrame.NavigationService.GoBack();
+        }
         private void MediaElement()
         {
             if (optionsPanelViewModel.StopAndPlay())
@@ -53,13 +62,19 @@ namespace YourNamespace
                 switch (selectedIndex)
                 {
                     case 0:
+                        //mainFrame.Navigate(quizPage);
                         break;
                     case 1:
                         gamePage = new GamePage(gameViewModel);
                         mainFrame.Navigate(gamePage);
+                        Keyboard.ClearFocus();
                         break;
                     case 2:
-                       // menuViewModel.Load(new GameModel());
+                        Scene scene = menuViewModel.Load(gameViewModel);
+                        gameViewModel.CurrentScene = scene;
+                        gameViewModel.IsLoaded = true;
+                        gamePage = new GamePage(gameViewModel);
+                        mainFrame.Navigate(gamePage);
                         break;
                     case 3:
                     var authorView = new AuthorView();
@@ -73,10 +88,14 @@ namespace YourNamespace
                     // Opcje
                     break;
                     case 5:
-                        // Wyjdź z gry
-                        Close();
+                        QuizPage quizPage = new QuizPage();
+                        quizPage.Show();
                         break;
-                }
+                    case 6:
+                        Application.Current.Shutdown();
+                        break;
+
+            }
         }
     }
 }

@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Xml;
+using YourNamespace;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace RiddleOfBlackStone.ViewModel
@@ -24,15 +25,16 @@ namespace RiddleOfBlackStone.ViewModel
 
         
 
-        public MenuViewModel(IMenuModel menuModel, IGameModel gameModel)
+        public MenuViewModel(IMenuModel menuModel, IGameModel gameModel, MainWindow menuView)
         {
-            gameViewModel = new GameViewModel(new GameModel());
+            gameViewModel = new GameViewModel(new GameModel(), menuView);
             _menuModel = menuModel;
             _gameModel = gameModel;
-           // Enter = new RelayCommand(p => HandleEnter());
+            // Enter = new RelayCommand(p => HandleEnter());
         }
-        public ICommand SaveCommand => new RelayCommand(p => Save(_gameModel));
-        public ICommand LoadCommand => new RelayCommand(p => Load(_gameModel));
+
+        //public ICommand SaveCommand => new RelayCommand(p => Save(gameViewModel));
+        public ICommand LoadCommand => new RelayCommand(p => Load(gameViewModel));
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -243,13 +245,13 @@ namespace RiddleOfBlackStone.ViewModel
             }
         }
 
-        public void Save(IGameModel emp)
+        public void Save(GameViewModel emp)
         {
             AppState appState = new AppState
             {
-                Scene = emp.currentScene,
-                Lives = emp.player.Lives,
-                sum = emp.sum
+                Scene = emp.CurrentScene,
+                Lives = emp.Player.Lives,
+                sum = emp.Sum
             };
             System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(appState.GetType());
             string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -258,16 +260,15 @@ namespace RiddleOfBlackStone.ViewModel
                 x.Serialize(output, appState);
             }
         }
-        public Scene Load(IGameModel emp)
+        public Scene Load(GameViewModel emp)
         {
             AppState appState = new AppState
             {
-                Scene = emp.currentScene,
-                Lives = emp.player.Lives,
-                sum = emp.sum
+                Scene = emp.CurrentScene,
+                Lives = emp.Player.Lives,
+                sum = emp.Sum
             };
             System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(appState.GetType());
-            emp.isLoaded = true;
             string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string filePath = Path.Combine(docPath, "save.xml");
             if (File.Exists(filePath))
@@ -275,12 +276,12 @@ namespace RiddleOfBlackStone.ViewModel
                 using (StreamReader output = new StreamReader(filePath))
                 {
                     var loadedScene = (AppState)x.Deserialize(output);
-                    emp.currentScene = loadedScene.Scene;
-                    emp.player.Lives = loadedScene.Lives;
-                    emp.sum = loadedScene.sum;
+                    emp.CurrentScene = loadedScene.Scene;
+                    emp.Player.Lives = loadedScene.Lives;
+                    emp.Sum = loadedScene.sum;
                 }
             }
-            return emp.currentScene;
+            return emp.CurrentScene;
         }
         public void HandleUserChoice()
         {
