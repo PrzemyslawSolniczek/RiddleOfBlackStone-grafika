@@ -1,4 +1,4 @@
-﻿<Window x:Class="RiddleOfBlackStone.QuizPage"
+﻿<Page x:Class="RiddleOfBlackStone.QuizPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,12 +11,12 @@
     <Grid>
         <StackPanel>
             <Frame x:Name="mainFrame" />
-            <TextBlock Text="{Binding Questions[0].Description}"/>
-            <RadioButton Content="{Binding Questions[SelectedOption].Answers[0].Description}" IsChecked="{Binding IsOption0Selected, Mode=TwoWay}"/>
-            <RadioButton Content="{Binding Questions[SelectedOption].Answers[1].Description}" IsChecked="{Binding IsOption1Selected, Mode=TwoWay}" />
-            <RadioButton Content="{Binding Questions[SelectedOption].Answers[2].Description}" IsChecked="{Binding IsOption2Selected, Mode=TwoWay}" />
-            <RadioButton Content="{Binding Questions[SelectedOption].Answers[3].Description}" IsChecked="{Binding IsOption3Selected, Mode=TwoWay}" />
+            <TextBlock Text="{Binding Questions[CurrentQuestionIndex].Description}"/>
+            <RadioButton Content="{Binding Questions[CurrentQuestionIndex].Answers[0].Description}" IsChecked="{Binding IsOption0Selected, Mode=TwoWay}"/>
+            <RadioButton Content="{Binding Questions[0].Answers[1].Description}" IsChecked="{Binding IsOption1Selected, Mode=TwoWay}" />
+            <RadioButton Content="{Binding Questions[0].Answers[2].Description}" IsChecked="{Binding IsOption2Selected, Mode=TwoWay}" />
+            <RadioButton Content="{Binding Questions[0].Answers[3].Description}" IsChecked="{Binding IsOption3Selected, Mode=TwoWay}" />
             <Button Content="Next" Command="{Binding ShowNextQuestionCommand}" Width="50" Height="50" />
         </StackPanel>
     </Grid>
-</Window>
+</Page>

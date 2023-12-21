@@ -32,14 +32,10 @@ namespace RiddleOfBlackStone.ViewModel
         private int currentTextLength;
         private readonly IGameModel gameModel;
         private MainWindow menuView;
-        private QuizViewModel quizViewModel = new QuizViewModel();
         private OptionsPanelViewModel optionsPanelViewModel = new OptionsPanelViewModel();
-        //public ICommand SaveCommand => new RelayCommand(p => Save());
-        //public ICommand LoadCommand => new RelayCommand(p => Load());
         public GameViewModel(IGameModel gameModel, MainWindow menuView)
         {
             this.menuView = menuView;
-            //menuView = _MenuView;
             this.gameModel = gameModel;
         }
 
@@ -245,16 +241,7 @@ namespace RiddleOfBlackStone.ViewModel
                 OnPropertyChanged(nameof(DisplayedChoices));
             }
         }
-        private string previousChoiceIndex;
-        public string PreviousChoiceIndex
-        {
-            get { return previousChoiceIndex; }
-            set
-            {
-                previousChoiceIndex = value;
-                OnPropertyChanged(nameof(PreviousChoiceIndex));
-            }
-        }
+
         private void InitializeTimer()
         {
             textDisplayTimer = new DispatcherTimer();
@@ -330,10 +317,9 @@ namespace RiddleOfBlackStone.ViewModel
        
         public void HandleChoiceSelected(int choiceIndex)
         {
-            Keyboard.ClearFocus();
+            //Keyboard.ClearFocus();
             if (CurrentScene != null && choiceIndex >= 0 && choiceIndex < CurrentScene.Choices.Count)
             {
-                Sum++;
                 Save();
                 OnPropertyChanged(nameof(Sum));
                 string selectedChoice = CurrentScene.Choices[choiceIndex].Description;
@@ -383,7 +369,6 @@ namespace RiddleOfBlackStone.ViewModel
             await tcs.Task;
 
             GameEnd();
-            //Task.Delay(3000).ContinueWith(_ => GameEnd());
         }
 
         private void GameEnd()
@@ -475,13 +460,6 @@ namespace RiddleOfBlackStone.ViewModel
             }
             return CurrentScene;
         }
-
-        private void OnNavigationBackRequested()
-        {
-            NavigationBackRequested?.Invoke(this, EventArgs.Empty);
-        }
-
-
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

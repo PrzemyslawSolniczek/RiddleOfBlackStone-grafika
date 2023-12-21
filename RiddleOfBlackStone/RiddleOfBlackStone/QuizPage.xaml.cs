@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RiddleOfBlackStone.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,13 @@ namespace RiddleOfBlackStone
     /// <summary>
     /// Logika interakcji dla klasy QuizPage.xaml
     /// </summary>
-    public partial class QuizPage : Window
+    public partial class QuizPage : Page
     {
-        public QuizPage()
+        private readonly GameViewModel gameViewModel;
+        public QuizPage(GameViewModel gameViewModel)
         {
             InitializeComponent();
+            this.gameViewModel = gameViewModel;
             DataContext = new QuizViewModel();
         }
     }

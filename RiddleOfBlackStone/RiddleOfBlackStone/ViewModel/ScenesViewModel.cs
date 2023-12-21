@@ -22,7 +22,7 @@ namespace RiddleOfBlackStone.ViewModel
             // tworzenie zakonczen
             Scene endingA = new Scene
             {
-                Description = "Zakończenie A: Okazuje się, że kamień był przeklęty.\nPrzez Twoje decyzje świat pogrąża się w chaosie, a tajemnicza moc kamienia jest teraz nie do opanowania.",
+                Description = "Zakończenie A: Okazuje się, że kamień był przeklęty.\nPrzez Twoje decyzje świat pogrąża się w chaosie, a tajemnicza moc kamienia jest \n teraz nie do opanowania.\n",
                 Choices = new List<Choice>(), // lista bedzie pusta
             };
 

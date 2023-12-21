@@ -8,8 +8,6 @@
         Title="Riddle of Black Stone" Width="1000" Height="600" >
 
     <Grid>
-        
-        
         <Grid.Background>
             <ImageBrush ImageSource="pictures/tlo.png" />
         </Grid.Background>
@@ -19,7 +17,7 @@
         </Grid.RowDefinitions>
         
         <MediaElement x:Name="mediaElement" />
-        <Frame x:Name="mainFrame"/>
+        <Frame x:Name="mainFrame" NavigationUIVisibility="Hidden"/>
 
 
         <!-- Menu Header -->
@@ -27,7 +25,7 @@
 
         <!-- Menu Items with Border -->
         <ListBox Grid.Row="1" Name="menuListBox" Foreground="#FFCC00" Background="#2c1b01" FontSize="20" HorizontalAlignment="Center" SelectionChanged="MenuListBox_SelectionChanged" Margin="0,271,0,81" RenderTransformOrigin="0.487,0.539" Width="280"
-                 BorderBrush="#FF9900" BorderThickness="4" FontFamily="Comic Sans MS">
+                 BorderBrush="#FF9900" BorderThickness="4" FontFamily="Comic Sans MS" PreviewKeyDown="MenuListBox_KeyDown">
            
             <!-- Dodane BorderBrush i BorderThickness -->
             <ListBoxItem>Menu</ListBoxItem>
@@ -36,7 +34,6 @@
             <ListBoxItem>O autorach</ListBoxItem>
             <ListBoxItem>Opcje</ListBoxItem>
             <ListBoxItem>Wyjdź z gry</ListBoxItem>
-            <ListBoxItem>Quiz</ListBoxItem>
 
             <!-- Ustawienia dla ListBoxItem -->
             <ListBox.ItemContainerStyle>

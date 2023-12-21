@@ -15,6 +15,8 @@ namespace YourNamespace
         private readonly MenuViewModel menuViewModel;
         private readonly OptionsPanelViewModel optionsPanelViewModel;
         private readonly GameViewModel gameViewModel;
+        private bool isArrowKeyPressed = false;
+        private bool flag = false;
 
 
         OptionsPanel optionsPanel = new OptionsPanel();
@@ -26,14 +28,14 @@ namespace YourNamespace
             InitializeComponent();
 
             optionsPanelViewModel = new OptionsPanelViewModel();
-            menuViewModel = new MenuViewModel(new MenuModel(), new GameModel(), this);
+            menuViewModel = new MenuViewModel(new MenuModel(), this);
             gameViewModel = new GameViewModel(new GameModel(), this);
-            //DataContext = menuViewModel;
             menuViewModel.PathToMusic = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Sound\WelcomeScreen.wav";
             menuViewModel.SoundPlayer.SoundLocation = menuViewModel.PathToMusic;
             MediaElement();
             menuListBox.SelectedIndex = -1;
             gameViewModel.NavigationBackRequested += HandleNavigationBackRequested;
+            PreviewKeyDown += MenuListBox_PreviewKeyDown;
             DataContext = menuViewModel;
         }
         private void HandleNavigationBackRequested(object sender, EventArgs e)
@@ -56,18 +58,42 @@ namespace YourNamespace
                 mediaElement.Source = null;
             }
         }
+        private void MainFrame_Loaded(object sender, RoutedEventArgs e)
+        {
+            var controlInsideFrame = mainFrame.Content as FrameworkElement;
+            if (controlInsideFrame != null)
+            {
+                controlInsideFrame.Focus();
+            }
+
+            mainFrame.Loaded -= MainFrame_Loaded;
+        }
+
+
         private void MenuListBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
             int selectedIndex = menuListBox.SelectedIndex;
-                switch (selectedIndex)
+            if (isArrowKeyPressed)
+            {
+                isArrowKeyPressed = false;
+                return;
+            }
+            switch (selectedIndex)
                 {
                     case 0:
                         //mainFrame.Navigate(quizPage);
                         break;
                     case 1:
-                        gamePage = new GamePage(gameViewModel);
+                        if(!flag)
+                        {
+                            gamePage = new GamePage(gameViewModel);
+                            mainFrame.IsTabStop = true;
+                            mainFrame.Focusable = true;
+                            flag = true;
+                        }
                         mainFrame.Navigate(gamePage);
-                        Keyboard.ClearFocus();
+                        mainFrame.Loaded += MainFrame_Loaded;
+                        mainFrame.Focus();
                         break;
                     case 2:
                         Scene scene = menuViewModel.Load(gameViewModel);
@@ -88,13 +114,36 @@ namespace YourNamespace
                     // Opcje
                     break;
                     case 5:
-                        QuizPage quizPage = new QuizPage();
-                        quizPage.Show();
-                        break;
-                    case 6:
                         Application.Current.Shutdown();
                         break;
 
+            }
+        }
+        private void MenuListBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Up || e.Key == Key.Down)
+            {
+                isArrowKeyPressed = true;
+            }
+            else
+            {
+                isArrowKeyPressed = false;
+            }
+        }
+        private void MenuListBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if(!flag)
+            {
+                if (e.Key == Key.Enter)
+                {
+                    int selectedIndex = menuListBox.SelectedIndex;
+                    if (selectedIndex >= 0 && selectedIndex < menuListBox.Items.Count)
+                    {
+                        MenuListBox_SelectionChanged(sender, e);
+                    }
+
+                    e.Handled = true;
+                }
             }
         }
     }

@@ -26,6 +26,9 @@ namespace RiddleOfBlackStone
     public partial class GamePage : Page
     {
         private readonly GameViewModel gameViewModel;
+        //private readonly QuizPage quizPage = new QuizPage(gameViewModel);
+        private bool check = false;
+        public int newIndex;
         public GamePage(GameViewModel _gameViewModel)
         {
             InitializeComponent();
@@ -35,6 +38,7 @@ namespace RiddleOfBlackStone
             DataContext = gameViewModel;
             choiceListBox.SelectionChanged += ChoiceListBox_SelectionChanged;
             TextDescription.Loaded += TextDescription_Loaded;
+
         }
         private void TextDescription_Loaded(object sender, RoutedEventArgs e)
         {
@@ -47,12 +51,36 @@ namespace RiddleOfBlackStone
 
             TextDescription.BeginAnimation(TextBlock.OpacityProperty, opacityAnimation);
         }
+        private void ChoiceListBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Up || e.Key == Key.Down)
+            {
+                e.Handled = true;
+
+                int offset = (e.Key == Key.Up) ? 0 : 1;
+
+                MoveSelection(offset);
+            }
+            if (e.Key == Key.Enter && check)
+            {
+                gameViewModel.ChoiceIndex = newIndex;
+                check = false;
+                gameViewModel.HandleChoiceSelected(newIndex);
+            }
+        }
+
+        private void MoveSelection(int offset)
+        {
+            newIndex = offset;
+            if (newIndex >= 0 && newIndex < choiceListBox.Items.Count)
+            {
+                choiceListBox.SelectedIndex = newIndex;
+                check = true;
+            }
+        }
 
         private void ChoiceListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Perform the choice selection logic here
-
-            // Start subsequent animations when a choice is made
             DoubleAnimation opacityAnimation = new DoubleAnimation
             {
                 From = 0,

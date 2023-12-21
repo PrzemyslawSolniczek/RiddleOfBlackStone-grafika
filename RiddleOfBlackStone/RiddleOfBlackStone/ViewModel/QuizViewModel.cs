@@ -24,7 +24,6 @@ namespace RiddleOfBlackStone
         {
             _player = new Player();
             _enemies = new Enemies();
-            _player.Lives = 3;
             _questions = new ObservableCollection<QuestionViewModel>( 
                 QuizInitializer.InitializeQuiz().Select(q => new QuestionViewModel(q)));
             _currentQuestionIndex = 0;
@@ -97,7 +96,6 @@ namespace RiddleOfBlackStone
                 }
             }
         }
-
         public int SelectedOption
         {
             get { return _selectedOption; }
@@ -135,7 +133,7 @@ namespace RiddleOfBlackStone
             set { if (value) SelectedOption = 3; }
         }
 
-        private void ShowQuestion()
+        public void ShowQuestion()
         {
             if (CurrentQuestionIndex < Questions.Count - 1)
             {
@@ -153,11 +151,6 @@ namespace RiddleOfBlackStone
                 OnPropertyChanged(nameof(IsOption3Selected));
                 OnPropertyChanged(nameof(PlayerLives));
                 OnPropertyChanged(nameof(EnemyLives));
-            }
-            else
-            {
-                
-                
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;

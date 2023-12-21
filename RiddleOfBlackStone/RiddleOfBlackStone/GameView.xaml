@@ -20,7 +20,7 @@
 
         <Frame x:Name="mainFrame"/>
         <Image x:Name ="gameImage" Grid.Row="0" Margin="90,10,87,72" Source="{Binding Source}"/>
-        <TextBlock x:Name="TextDescription" Text="{Binding TextDescription}" Margin="10,328,10,66" Foreground="White" FontSize="15" Grid.RowSpan="3">
+        <TextBlock x:Name="TextDescription" Text="{Binding TextDescription}" Margin="0,328,0,66" Foreground="White" FontSize="15" Grid.RowSpan="3">
             <TextBlock.Triggers>
                 <EventTrigger RoutedEvent="FrameworkElement.Loaded">
                     <BeginStoryboard>
@@ -35,7 +35,7 @@
                 </EventTrigger>
             </TextBlock.Triggers>
         </TextBlock>
-        <ListBox Name="choiceListBox" ItemsSource="{Binding DisplayedChoices}" Grid.Row="1" VerticalAlignment="Top" Height="51" Foreground="#FFCC00" Background="#2c1b01" Margin="0,36,0,0" Grid.RowSpan="2" >
+        <ListBox Name="choiceListBox" ItemsSource="{Binding DisplayedChoices}" Grid.Row="1" VerticalAlignment="Top" Height="51" Foreground="#FFCC00" Background="#2c1b01" Margin="0,36,0,0" Grid.RowSpan="2" PreviewKeyDown="ChoiceListBox_PreviewKeyDown" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding}" />
@@ -43,7 +43,8 @@
             </ListBox.ItemTemplate>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding ChoiceSelectedCommand}" CommandParameter="{Binding SelectedIndex, ElementName=choiceListBox}" />
+                    <i:InvokeCommandAction Command="{Binding ChoiceSelectedCommand}" 
+                                           CommandParameter="{Binding SelectedIndex, ElementName=choiceListBox}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListBox>

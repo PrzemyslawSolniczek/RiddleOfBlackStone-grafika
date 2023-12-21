@@ -20,20 +20,16 @@ namespace RiddleOfBlackStone.ViewModel
     internal class MenuViewModel : INotifyPropertyChanged
     {
         private readonly IMenuModel _menuModel;
-        private readonly IGameModel _gameModel;
         private GameViewModel gameViewModel;
 
         
 
-        public MenuViewModel(IMenuModel menuModel, IGameModel gameModel, MainWindow menuView)
+        public MenuViewModel(IMenuModel menuModel, MainWindow menuView)
         {
             gameViewModel = new GameViewModel(new GameModel(), menuView);
             _menuModel = menuModel;
-            _gameModel = gameModel;
-            // Enter = new RelayCommand(p => HandleEnter());
         }
 
-        //public ICommand SaveCommand => new RelayCommand(p => Save(gameViewModel));
         public ICommand LoadCommand => new RelayCommand(p => Load(gameViewModel));
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -177,50 +173,6 @@ namespace RiddleOfBlackStone.ViewModel
             }
         }
 
-        public void StartGame()
-        {
-            gameViewModel.CurrentScene = ScenesViewModel.InitializeStory();
-        }
-
-        private void StopGame()
-        {
-            //throw new NotImplementedException();
-        }
-        private void AboutAuthors()
-        {
-
-            //throw new NotImplementedException();
-        }
-        private void CloseGame() 
-        { 
-
-        }
-        private void Options() 
-        {
-            switch (selectedOption)
-            {
-                case 0:
-                    break;
-                    case 1:
-                        DisplayTextLetterByLetter = !DisplayTextLetterByLetter;
-                        break;
-                    case 2:
-                        SaveOptionsToFile("options.xml");
-                        return;
-            }
-        }
-
-        private void HandleUpArrow()
-        {
-            selectedOption = Math.Max(0, selectedOption);
-        }
-
-        private void HandleDownArrow()
-        {
-            selectedOption = Math.Min(3, selectedOption + 1); //DO SPRAWDZENIA
-        }
-
-
         public void SaveOptionsToFile(string filename)
         {
             try
@@ -282,27 +234,6 @@ namespace RiddleOfBlackStone.ViewModel
                 }
             }
             return emp.CurrentScene;
-        }
-        public void HandleUserChoice()
-        {
-            switch (UserChoice)
-            {
-                case 0:
-                    StartGame();
-                    break;
-                case 1:
-                    StopGame();
-                    break;
-                case 2:
-                    AboutAuthors();
-                    break;
-                case 3:
-                    Options();
-                    break;
-                case 4:
-                    CloseGame(); //do implementacji
-                    break;
-            }
         }
 
     }
