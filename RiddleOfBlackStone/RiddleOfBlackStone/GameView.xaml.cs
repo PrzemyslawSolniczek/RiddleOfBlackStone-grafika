@@ -90,57 +90,62 @@ namespace RiddleOfBlackStone
 
             TextDescription.BeginAnimation(TextBlock.OpacityProperty, opacityAnimation);
         }
-        /*
-        private void choiceListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private void choiceListBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            int selectedIndex = choiceListBox.SelectedIndex;
-            string selectedChoice = choiceListBox.SelectedItem as string;
 
-            if (!string.IsNullOrEmpty(selectedChoice))
-            {
-                string imagePath = $"pictures/{selectedChoice}.png";
-                gameImage.Source = new BitmapImage(new Uri(imagePath, UriKind.Relative));
-            }
-
-            if (selectedIndex >= 0 && selectedIndex < gameViewModel.CurrentScene.Choices.Count)
-            {
-                gameViewModel.HandleChoiceSelected(selectedIndex);
-                UpdateChoices(); 
-            }
-
-        }
-
-        private void UpdateChoices()
-        {
-            gameViewModel.Choices.Clear();
-
-            foreach (var choice in gameViewModel.CurrentScene.Choices)
-            {
-                gameViewModel.Choices.Add(choice.Description);
-            }
         }
         /*
-        public void DisplayChoices(int choices)
-        {
-            //choiceListBox.Items.Clear();
-            for (int i = 0; i < gameViewModel.CurrentScene.Choices.Count; i++)
-            {
-                var choice = gameViewModel.CurrentScene.Choices[i];
+private void choiceListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+{
+   int selectedIndex = choiceListBox.SelectedIndex;
+   string selectedChoice = choiceListBox.SelectedItem as string;
 
-                ListBoxItem listBoxItem = new ListBoxItem();
-                listBoxItem.Content = choice.Description;
+   if (!string.IsNullOrEmpty(selectedChoice))
+   {
+       string imagePath = $"pictures/{selectedChoice}.png";
+       gameImage.Source = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+   }
 
-                if (i == choices)
-                {
-                    listBoxItem.Foreground = Brushes.Green;
-                    listBoxItem.Content = $">> {choice.Description}";
-                }
+   if (selectedIndex >= 0 && selectedIndex < gameViewModel.CurrentScene.Choices.Count)
+   {
+       gameViewModel.HandleChoiceSelected(selectedIndex);
+       UpdateChoices(); 
+   }
 
-                choiceListBox.Items.Add(listBoxItem);
-            }
+}
 
-            //gameViewModel.DisplayChoicesWithHighlight(2);
-        }
-        */
+private void UpdateChoices()
+{
+   gameViewModel.Choices.Clear();
+
+   foreach (var choice in gameViewModel.CurrentScene.Choices)
+   {
+       gameViewModel.Choices.Add(choice.Description);
+   }
+}
+/*
+public void DisplayChoices(int choices)
+{
+   //choiceListBox.Items.Clear();
+   for (int i = 0; i < gameViewModel.CurrentScene.Choices.Count; i++)
+   {
+       var choice = gameViewModel.CurrentScene.Choices[i];
+
+       ListBoxItem listBoxItem = new ListBoxItem();
+       listBoxItem.Content = choice.Description;
+
+       if (i == choices)
+       {
+           listBoxItem.Foreground = Brushes.Green;
+           listBoxItem.Content = $">> {choice.Description}";
+       }
+
+       choiceListBox.Items.Add(listBoxItem);
+   }
+
+   //gameViewModel.DisplayChoicesWithHighlight(2);
+}
+*/
     }
 }

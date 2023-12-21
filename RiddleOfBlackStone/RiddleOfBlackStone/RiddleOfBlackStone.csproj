@@ -163,7 +163,6 @@
     <Resource Include="pictures\Wejść w przejście.png" />
     <Resource Include="pictures\Kontynuować badanie.png" />
     <Resource Include="pictures\Przyjrzeć się kamieniowi.png" />
-    <Resource Include="pictures\Włożyć kamień na ołtarz.png" />
     <Resource Include="pictures\okienko1.jpg" />
     <Resource Include="pictures\okienko2.jpg" />
     <Resource Include="pictures\statua2.jpg" />
@@ -172,6 +171,9 @@
     <Resource Include="pictures\statua2_transparent.png" />
     <Resource Include="pictures\Opuścić jaskinię.png" />
     <Resource Include="pictures\Zabrać kamień.png" />
+    <Resource Include="pictures\Włożyć kamień na ołtarz.png" />
+    <Resource Include="pictures\kolumny.png" />
+    <Resource Include="pictures\hieroglify.jpg" />
     <Content Include="Sound\WelcomeScreen.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

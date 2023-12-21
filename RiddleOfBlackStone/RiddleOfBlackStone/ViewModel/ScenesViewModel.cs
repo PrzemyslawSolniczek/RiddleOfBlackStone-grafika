@@ -22,39 +22,39 @@ namespace RiddleOfBlackStone.ViewModel
             // tworzenie zakonczen
             Scene endingA = new Scene
             {
-                Description = "Zakończenie A: Okazuje się, że kamień był przeklęty.\nPrzez Twoje decyzje świat pogrąża się w chaosie, a tajemnicza moc kamienia jest \n teraz nie do opanowania.\n",
+                Description = "Zakończenie A: Okazuje się, że kamień był przeklęty\nPrzez Twoje decyzje świat pogrąża się w chaosie,\na tajemnicza moc kamienia jest \nteraz nie do opanowania.\n",
                 Choices = new List<Choice>(), // lista bedzie pusta
             };
 
             Scene endingB = new Scene
             {
-                Description = "Zakończenie B: Dzięki Twoim badaniom i decyzjom, \nstarożytna technologia przywraca równowagę środowiskową na Ziemi.\nŚwiat odnawia się i wchodzi w nową erę dobrobytu.",
+                Description = "Zakończenie B: Dzięki Twoim badaniom i decyzjom,\nstarożytna technologia przywraca równowagę \nśrodowiskową na Ziemi.\nŚwiat odnawia się i wchodzi w nową erę dobrobytu.",
                 Choices = new List<Choice>(), // lista bedzie pusta
             };
 
             // tworzenie scen
             Scene scene1 = new Scene
             {
-                Description = "Właśnie odkryłeś tajemniczy czarny kamień z nieznanych znaków.\nKamień ten może prowadzić do wielkiego skarbu lub przeklętej katastrofy.",
+                Description = "Właśnie odkryłeś tajemniczy czarny kamień z\nnieznanych znaków. Kamień ten może prowadzić do \nwielkiego skarbu lub przeklętej katastrofy.",
                 Choices = new List<Choice>(),
             };
 
             Scene scene2 = new Scene
             {
-                Description = "Znaki na kamieniu zaczynają świecić i ukazują Ci drogę do ukrytego pomieszczenia w jaskini.\nW środku jest ołtarz z miejscem na kamień.",
+                Description = "Znaki na kamieniu zaczynają świecić i ukazują Ci drogę do\nukrytego pomieszczenia w jaskini. W środku jest ołtarz \nz miejscem na kamień.",
                 Choices = new List<Choice>()
             };
 
             Scene scene3 = new Scene
             {
-                Description = "Po wyjściu z jaskini spotykasz tajemniczą postać w kapturze,\nktóra proponuje Ci wielką sumę pieniędzy za kamień.",
+                Description = "Po wyjściu z jaskini spotykasz tajemniczą postać \nw kapturze, która proponuje Ci wielką sumę pieniędzy za kamień.",
                 
                 Choices = new List<Choice>()
             };
 
             Scene scene4 = new Scene
             {
-                Description = "Po włożeniu kamienia ołtarz zaczyna się obracać, ukazując tajemne przejście.",
+                Description = "Po włożeniu kamienia ołtarz zaczyna się obracać,\nukazując tajemne przejście.",
                 Choices = new List<Choice>()
             };
 
